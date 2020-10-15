@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:amongus_generator/ui/home/views/favorites_view.dart';
 import 'package:amongus_generator/ui/home/views/home_view.dart';
-import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -28,6 +29,8 @@ class _HomePageState extends State<HomePage> {
         index: _selectedIndex,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        unselectedItemColor: Colors.white,
         currentIndex: _selectedIndex,
         items: [
           BottomNavigationBarItem(

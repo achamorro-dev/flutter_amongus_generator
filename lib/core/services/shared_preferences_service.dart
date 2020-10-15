@@ -30,7 +30,9 @@ class SharedPreferencesService {
     if (favorites == null) {
       favorites = [favorite];
     } else {
-      favorites.add(favorite);
+      var favoritesCopy = favorites;
+      favoritesCopy.add(favorite);
+      favorites = favoritesCopy;
     }
   }
 }

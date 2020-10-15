@@ -1,5 +1,6 @@
-import 'package:amongus_generator/ui/home/home.dart';
 import 'package:flutter/material.dart';
+
+import 'package:amongus_generator/ui/home/home.dart';
 
 void main() {
   runApp(MyApp());

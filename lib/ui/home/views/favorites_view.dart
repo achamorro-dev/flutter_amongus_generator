@@ -1,5 +1,6 @@
-import 'package:amongus_generator/ui/widgets/character.dart';
 import 'package:flutter/material.dart';
+
+import 'package:amongus_generator/ui/widgets/character.dart';
 import 'package:amongus_generator/core/models/amongus_character.dart';
 import 'package:amongus_generator/core/services/shared_preferences_service.dart';
 
@@ -14,11 +15,17 @@ class FavoritesView extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data == null || snapshot.data.length == 0) {
-              return Text('No hay favoritos aún');
+              return Text(
+                'No hay favoritos guardados aún',
+                style: TextStyle(color: Colors.white),
+              );
             }
 
-            return ListView(
-              children: snapshot.data,
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ListView(
+                children: snapshot.data,
+              ),
             );
           }
 
@@ -30,6 +37,8 @@ class FavoritesView extends StatelessWidget {
 
   Future<List<Widget>> getFavorites() async {
     var prefs = await SharedPreferencesService.getInstance();
+    if (prefs.favorites == null) return [];
+
     return prefs.favorites
         .map((characterJson) => new Character(
               amongUsCharacter: amongUsCharacterFromJson(characterJson),

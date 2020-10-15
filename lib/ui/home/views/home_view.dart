@@ -1,7 +1,9 @@
+import 'package:amongus_generator/core/services/shared_preferences_service.dart';
+import 'package:flutter/material.dart';
+
 import 'package:amongus_generator/core/models/amongus_character.dart';
 import 'package:amongus_generator/core/services/amongus_service.dart';
 import 'package:amongus_generator/ui/widgets/character.dart';
-import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
@@ -26,6 +28,9 @@ class _HomeViewState extends State<HomeView> {
   }
 
   saveCharacter() async {
+    var prefs = await SharedPreferencesService.getInstance();
+    prefs.addToFavorite(amongUsCharacterToJson(amongUsCharacter));
+
     amongUsCharacter = await amongUsService.generateRandomCharacter();
     setState(() {});
   }
