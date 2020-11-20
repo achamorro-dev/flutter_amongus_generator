@@ -21,11 +21,10 @@ class FavoritesView extends StatelessWidget {
               );
             }
 
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView(
-                children: snapshot.data,
-              ),
+            return ListView.separated(
+              separatorBuilder: (_,__) => SizedBox(height: 20,),
+              itemCount: snapshot.data.length,
+              itemBuilder: (_, index) =>  snapshot.data[index],
             );
           }
 
