@@ -9,28 +9,32 @@ class FavoritesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FutureBuilder(
-        future: getFavorites(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data == null || snapshot.data.length == 0) {
-              return Text(
+    return FutureBuilder(
+      future: getFavorites(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data == null || snapshot.data.length == 0) {
+            return Center(
+              child: Text(
                 'No hay favoritos guardados aún',
-                style: TextStyle(color: Colors.white),
-              );
-            }
-
-            return ListView.separated(
-              separatorBuilder: (_,__) => SizedBox(height: 20,),
-              itemCount: snapshot.data.length,
-              itemBuilder: (_, index) =>  snapshot.data[index],
+                style: Theme.of(context).textTheme.headline5.copyWith(
+                      color: Colors.white,
+                    ),
+              ),
             );
           }
 
-          return CircularProgressIndicator();
-        },
-      ),
+          return ListView.separated(
+            separatorBuilder: (_, __) => SizedBox(
+              height: 20,
+            ),
+            itemCount: snapshot.data.length,
+            itemBuilder: (_, index) => snapshot.data[index],
+          );
+        }
+
+        return CircularProgressIndicator();
+      },
     );
   }
 

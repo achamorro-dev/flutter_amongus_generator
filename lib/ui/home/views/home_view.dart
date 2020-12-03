@@ -37,22 +37,55 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: amongUsCharacter == null
-          ? CircularProgressIndicator()
-          : Dismissible(
-              onDismissed: (direction) {
-                if (direction == DismissDirection.endToStart) {
-                  getNewCharacter();
-                } else {
-                  saveCharacter();
-                }
-              },
-              key: Key(amongUsCharacter.name),
-              child: Character(
-                amongUsCharacter: amongUsCharacter,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        SizedBox(height: 16),
+        Text(
+          'Desliza a izquierda o derecha',
+          style: Theme.of(context).textTheme.headline5.copyWith(
+                color: Colors.white,
               ),
-            ),
+        ),
+        SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(
+                Icons.highlight_off_rounded,
+                size: 60,
+                color: Colors.red,
+              ),
+              Icon(
+                Icons.favorite_outline,
+                size: 60,
+                color: Colors.green,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 40),
+        Center(
+          child: amongUsCharacter == null
+              ? CircularProgressIndicator()
+              : Dismissible(
+                  onDismissed: (direction) {
+                    if (direction == DismissDirection.endToStart) {
+                      getNewCharacter();
+                    } else {
+                      saveCharacter();
+                    }
+                  },
+                  key: Key(amongUsCharacter.name),
+                  child: Character(
+                    amongUsCharacter: amongUsCharacter,
+                  ),
+                ),
+        ),
+        Spacer(),
+      ],
     );
   }
 }
